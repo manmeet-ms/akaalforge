@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Space+Mono:regular,italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Space+Grotesk:300,regular,500,600,700);
+
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+
+body,html{
+  scroll-behavior: smooth !important;
+  /* background-color: black; */
+}
+
+.font-space-mono{
+  font-family: 'Space Grotesk';
+  font-family: 'Space Mono';
+}
+   
+::selection{
+  background-color: rgba(73, 43, 226, 0.4);
+}

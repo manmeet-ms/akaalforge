@@ -1,0 +1,17 @@
+commit d11839b9e738bf03b117e120ea9a877cfa10802d
+Author: Manmeet Singh <manmeets.zsh@gmail.com>
+Date:   Fri Nov 14 23:19:34 2025 +0530
+
+    chenged btn to sci-fi, landing page changed design changes
+
+commit db9113bda1e77714666366fd3d594455ebf805e0
+Author: Manmeet Singh <manmeets.zsh@gmail.com>
+Date:   Fri Nov 14 23:14:48 2025 +0530
+
+    chenged btn to sci-fi, landing page changed design changes
+
+commit 32b87d90f8d9d771a0733272639c69e4a834f1fd
+Author: Manmeet Singh <manmeets.zsh@gmail.com>
+Date:   Fri Nov 7 00:42:51 2025 +0530
+
+    initial commit
