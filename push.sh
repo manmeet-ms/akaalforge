@@ -1,4 +1,4 @@
 git status --short
 git add -A
-git commit -am "chenged btn to sci-fi, landing page changed design changes "
+git commit -am "./backedn push"
 git push origin main
