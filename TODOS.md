@@ -1,13 +1,20 @@
-real data on the contet of the pre existing txt based upn the tone passionate, motivated and gut feeling starups , marketingt tone, but authentic sounding not cheezy , not sugar coated, authentic dont look it lok naive theaht was came form inside  , about philosophy 
+write on hasnode, fetch blogs, get view counts and also post duplex, get donantion s and hasbode roignal na also also populatwe on riginal site , same with medium , hashnode > medium > fetch to site populate 
 
+commuty linsk wil hashnode, linekdin 
+- get a intent form , wil you build this air purifer, 
+- how did you like this rtivle 
+- fill the form add srouce of artivle
+devillaughing mnodel in jathedar
 
-this is not related to Community‑driven, Preserving history
+get view vount in artivle reading library backed 
 
+hashtag finding , strapinew content type "tags"
+start app buildig series with tags then, jth#1, stk#1, mst#5, esn#3
 
 this is my umbrella company to launch projects under it, i have made , 
 
 
--[ ]- jathedar- self trackign difgtial warden PWA app, 
+-[ ]- akaalforge- self trackign difgtial warden PWA app, 
 -[ ]- shastarkosh- preserving istory of rhe acnient apps community riven pplatfom on nweb , 
 -[ ]- mistrite- temporay note taknig sevice,
 -[ ]- essentia monthly ration list maker - 
@@ -15,10 +22,6 @@ this is my umbrella company to launch projects under it, i have made ,
 
  
 - AI‑powered insights 
-
-on frontend facing pages, like home about roadmap , community , contact 
-
-add proper IDs to frontend sections blocks and make some internal linking on the frontend , font change teh css or the structure just change the etxt
 
 
 ## my philsphy is 
@@ -30,4 +33,5 @@ one stop soltion for all
 continuous building and improvements
 ship an mvp with core features first from couple of yeas
 ## some negatives 
-i still sometimes delve into perfectnisonm
+i still sometimes delve into perfectionism
+

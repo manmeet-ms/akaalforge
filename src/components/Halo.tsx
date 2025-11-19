@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import HALO from "vanta/dist/vanta.halo.min";
 import { Link } from "@tanstack/react-router";
 
 gsap.registerPlugin(SplitText, useGSAP);
@@ -45,8 +44,6 @@ export const HaloHero = ({
   ],
   microDetails = ["Hardware projects", "Software apps", "Built with purpose"],
 }) => {
-  const [vantaEffect, setVantaEffect] = useState(0);
-  const vantaRef = useRef(null);
   const { width, height } = useWindowSize();
   const sectionRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLHeadingElement | null>(null);
@@ -124,31 +121,9 @@ export const HaloHero = ({
     },
     { scope: sectionRef }
   );
-  useEffect(() => {
-    if (!vantaEffect) {
-      setVantaEffect(
-        HALO({
-          el: vantaRef.current,
-          THREE: THREE,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 800.0,
-          minWidth: 800.0,
-          scale: 1.0,
-          scaleMobile: 0.8,
-          baseColor: 0x040b07,
-          backgroundColor: 0x040b07,
-        })
-      );
-    }
-    return () => {
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, [vantaEffect]);
+ 
   return (
     <section ref={sectionRef} className="relative  h-screen   overflow-hidden">
-      <div className="hidden" ref={vantaRef}   > </div>
       <div className="absolute inset-0 hue-rotate-160  saturate-30 brightness-50   ">
         {/* <Scene /> */}
       {/* <NeuralNetwork/> */}

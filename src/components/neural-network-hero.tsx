@@ -21,9 +21,9 @@ import * as THREE from "three";
 gsap.registerPlugin(SplitText, useGSAP);
 const services = [
   {
-    title: "Jathedar",
+    title: "Akaalforge",
     image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-6jEVl7xPH3E-unsplash.jpg",
-    url: "https://jathedar.vercel.app?ref=akaalforge.vercel.app",
+    url: "https://akaalforge.vercel.app?ref=akaalforge.vercel.app",
   },
   {
     title: "Shastarkosh",

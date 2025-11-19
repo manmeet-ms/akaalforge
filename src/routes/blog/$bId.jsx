@@ -1,159 +1,114 @@
-import LandingFooter from "@/components/Footer/LandingFooter";
-import { createFileRoute, useParams } from "@tanstack/react-router";
-
-import LandingHeader from "../../components/Header/LandingHeader.jsx";
- 
-
-import { format } from "date-fns";
-import { Lightbulb } from "lucide-react";
-
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-const defaultPost = {
-  title: "Designing websites faster with shadcn/ui",
-  authorName: "John Doe",
-  image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
-  pubDate: new Date(),
-  description:
-    "A step-by-step guide to building a modern, responsive blog using React and Tailwind CSS.",
-  authorImage: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
-};
+import LandingFooter from "@/components/Footer/LandingFooter.jsx";
+import LandingHeader from "@/components/Header/LandingHeader.jsx";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { createFileRoute } from "@tanstack/react-router";
+import axios from "axios";
+import dayjs from "dayjs";
+import { ChevronLeft } from "lucide-react";
+import { useEffect, useState } from "react";
+import Markdown from "react-markdown";
 
 export const Route = createFileRoute("/blog/$bId")({
   component: RouteComponent,
 });
 
-function RouteComponent({ post = defaultPost }) {
-  const { title, authorName, image, pubDate, description, authorImage } = post;
-   const {bId}=Route.useParams()
-   console.log(bId);
-   
+function RouteComponent() {
+  const { bId } = Route.useParams();
+  const endpoint = `${import.meta.env.VITE_STRAPI_BACKEND_API_URL}articles/${bId}?populate=*`;
+  const [article, setArticle] = useState(null);
+
+  const asset = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http")) return url;
+    return `${import.meta.env.VITE_STRAPI_BACKEND_URL}${url}`;
+  };
+
+  const fetchArticle = async () => {
+    const res = await axios.get(endpoint);
+    setArticle(res.data?.data || null);
+  };
+
+  useEffect(() => {
+    fetchArticle();
+  }, []);
   return (
     <>
       <LandingHeader />
-      {/* <HeroRed /> */}
- <section className="py-32 px-12 mx-auto">
-      <div className="container">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center">
-          <h1 className="max-w-3xl text-pretty text-5xl font-semibold md:text-6xl">
-            {title}
-          </h1>
-          <h3 className="text-muted-foreground max-w-3xl text-lg md:text-xl">
-            {description}
-          </h3>
-          <div className="flex items-center gap-3 text-sm md:text-base">
-            <Avatar className="h-8 w-8 border">
-              <AvatarImage src={authorImage} />
-              <AvatarFallback>{authorName.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <span>
-              <a href="#" className="font-semibold">
-                {authorName}{bId}
-              </a>
-              <span className="ml-1">on {format(pubDate, "MMMM d, yyyy")}</span>
-            </span>
+
+      <section className="py-8 px-12">
+        <div className="container">
+          <div className="relative flex flex-col justify-between gap-10 lg:flex-row">
+            <aside className="top-20 h-fit flex-shrink-0 lg:sticky lg:w-[300px] xl:w-[400px]">
+              {/* <a className="text-muted-foreground hover:text-primary mb-5 flex items-center gap-1" href="#">
+                <ChevronLeft className="h-full w-4" />
+                Return to home
+              </a> */}
+              <div className="flex mb-4  flex-col gap-2">
+                <h1 className=" text-balance text-3xl font-bold lg:text-4xl">{article?.title}</h1>
+                <span className=" text-muted-foreground    ">{article?.description}</span>
+                <hr />
+              </div>
+              <div className="flex gap-3">
+                <Avatar className="size-7  p-5 rounded-full bg-accent flex items-center justify-center  ">
+                  {/* <AvatarImage src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp" alt="placeholder" /> */}
+                  {article?.author?.name.charAt(0).toUpperCase()}
+                </Avatar>
+                <div>
+                  <h2 className="font-semibold">{article?.author?.name}</h2>
+                  <p className="text-muted-foreground text-xs">{dayjs(article?.publishedAt).format("DD MMM, YYYY")}</p>
+                </div>
+              </div>
+            </aside>
+
+            <article className="">
+              <img src={asset(article?.cover?.formats?.large?.url || article?.cover?.url)} alt="cover" className="mb-6 w-full rounded-lg border object-cover" />
+              <div className="prose dark:prose-invert">
+                {Array.isArray(article?.blocks) &&
+                  article.blocks.map((blk, i) => {
+                    if (!blk || !blk.__component) return null;
+                    switch (blk.__component) {
+                      case "shared.rich-text": {
+                        const body = blk.body || "";
+                        return (
+                          <div key={`blk-rich-${blk.id || i}`} className="my-6">
+                            <Markdown>{body}</Markdown>
+                          </div>
+                        );
+                      }
+                      case "shared.media": {
+                        const media = blk.media || blk.file || blk.image || null;
+                        const src = asset(media?.url || media?.formats?.large?.url || media?.formats?.medium?.url || media?.formats?.small?.url);
+                        const alt = media?.alternativeText || media?.name || "media";
+                        if (!src) return null;
+                        return (
+                          <div key={`blk-media-${blk.id || i}`} className="my-8">
+                            <img src={src} alt={alt} className="w-full rounded-md border object-cover" />
+                          </div>
+                        );
+                      }
+                      case "shared.slider": {
+                        const items = blk.items || blk.images || [];
+                        if (!Array.isArray(items) || items.length === 0) return null;
+                        return (
+                          <div key={`blk-slider-${blk.id || i}`} className="my-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            {items.map((it, idx) => {
+                              const src = asset(it?.url || it?.formats?.medium?.url || it?.formats?.small?.url);
+                              if (!src) return null;
+                              return <img key={`slide-${idx}`} src={src} alt={it?.alternativeText || it?.name || `slide-${idx}`} className="w-full rounded-md border" />;
+                            })}
+                          </div>
+                        );
+                      }
+                      default:
+                        return <div key={`blk-unknown-${blk.id || i}`} className="my-4" />;
+                    }
+                  })}
+              </div>
+            </article>
           </div>
-          <img
-            src={image}
-            alt="placeholder"
-            className="mb-8 mt-4 aspect-video w-full rounded-lg border object-cover"
-          />
         </div>
-      </div>
-      <div className="container">
-        <div className="prose dark:prose-invert mx-auto max-w-3xl">
-          <h2 className="text-3xl font-extrabold">The Great Joke Tax</h2>
-          <p className="text-muted-foreground mt-2 text-lg">
-            In a kingdom far away, where laughter once flowed freely, a peculiar
-            tale unfolded about a king who decided to tax the very essence of
-            joy itself - jokes and jest.
-          </p>
+      </section>
 
-          <h2>How the Tax System Works</h2>
-          <p>
-            The king, seeing how much happier his subjects were, realized the
-            error of his ways and repealed the joke tax. Jokester was declared a
-            hero, and the kingdom lived happily ever after.
-          </p>
-          <Alert>
-            <Lightbulb className="h-4 w-4" />
-            <AlertTitle>Royal Decree!</AlertTitle>
-            <AlertDescription>
-              Remember, all jokes must be registered at the Royal Jest Office
-              before telling them
-            </AlertDescription>
-          </Alert>
-          <h2>The People&apos;s Rebellion</h2>
-          <p>
-            The people of the kingdom, feeling uplifted by the laughter, started
-            to tell jokes and puns again, and soon the entire kingdom was in on
-            the joke.
-          </p>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>King&apos;s Treasury</th>
-                  <th>People&apos;s happiness</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Empty</td>
-                  <td>Overflowing</td>
-                </tr>
-                <tr className="even:bg-muted m-0 border-t p-0">
-                  <td>Modest</td>
-                  <td>Satisfied</td>
-                </tr>
-                <tr className="even:bg-muted m-0 border-t p-0">
-                  <td>Full</td>
-                  <td>Ecstatic</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p>
-            The king, seeing how much happier his subjects were, realized the
-            error of his ways and repealed the joke tax. Jokester was declared a
-            hero, and the kingdom lived happily ever after.
-          </p>
-
-          <h2>The King&apos;s Plan</h2>
-
-          <img
-            src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg"
-            alt="placeholder"
-            className="my-8 aspect-video w-full rounded-md object-cover"
-          />
-          <p>
-            The king thought long and hard, and finally came up with{" "}
-            <a href="#">a brilliant plan</a>: he would tax the jokes in the
-            kingdom.
-          </p>
-          <blockquote>
-            &ldquo;After all,&rdquo; he said, &ldquo;everyone enjoys a good
-            joke, so it&apos;s only fair that they should pay for the
-            privilege.&rdquo;
-          </blockquote>
-          <p>
-            The king&apos;s subjects were not amused. They grumbled and
-            complained, but the king was firm:
-          </p>
-          <ul>
-            <li>1st level of puns: 5 gold coins</li>
-            <li>2nd level of jokes: 10 gold coins</li>
-            <li>3rd level of one-liners : 20 gold coins</li>
-          </ul>
-          <p>
-            As a result, people stopped telling jokes, and the kingdom fell into
-            a gloom. But there was one person who refused to let the king&apos;s
-            foolishness get him down: a court jester named Jokester.
-          </p>
-        </div>
-      </div>
-    </section>
       <LandingFooter />
     </>
   );

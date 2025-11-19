@@ -20,6 +20,8 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogBlogFeedbackRouteImport } from './routes/blog/blogFeedback'
+import { Route as BlogBIdcopyRouteImport } from './routes/blog/$bId copy'
 import { Route as BlogBIdRouteImport } from './routes/blog/$bId'
 
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -77,6 +79,16 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogBlogFeedbackRoute = BlogBlogFeedbackRouteImport.update({
+  id: '/blog/blogFeedback',
+  path: '/blog/blogFeedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogBIdcopyRoute = BlogBIdcopyRouteImport.update({
+  id: '/blog/$bId copy',
+  path: '/blog/$bId copy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogBIdRoute = BlogBIdRouteImport.update({
   id: '/blog/$bId',
   path: '/blog/$bId',
@@ -95,6 +107,8 @@ export interface FileRoutesByFullPath {
   '/philosophy': typeof PhilosophyRoute
   '/roadmap': typeof RoadmapRoute
   '/blog/$bId': typeof BlogBIdRoute
+  '/blog/$bId copy': typeof BlogBIdcopyRoute
+  '/blog/blogFeedback': typeof BlogBlogFeedbackRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +123,8 @@ export interface FileRoutesByTo {
   '/philosophy': typeof PhilosophyRoute
   '/roadmap': typeof RoadmapRoute
   '/blog/$bId': typeof BlogBIdRoute
+  '/blog/$bId copy': typeof BlogBIdcopyRoute
+  '/blog/blogFeedback': typeof BlogBlogFeedbackRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -124,6 +140,8 @@ export interface FileRoutesById {
   '/philosophy': typeof PhilosophyRoute
   '/roadmap': typeof RoadmapRoute
   '/blog/$bId': typeof BlogBIdRoute
+  '/blog/$bId copy': typeof BlogBIdcopyRoute
+  '/blog/blogFeedback': typeof BlogBlogFeedbackRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +158,8 @@ export interface FileRouteTypes {
     | '/philosophy'
     | '/roadmap'
     | '/blog/$bId'
+    | '/blog/$bId copy'
+    | '/blog/blogFeedback'
     | '/blog'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +174,8 @@ export interface FileRouteTypes {
     | '/philosophy'
     | '/roadmap'
     | '/blog/$bId'
+    | '/blog/$bId copy'
+    | '/blog/blogFeedback'
     | '/blog'
   id:
     | '__root__'
@@ -168,6 +190,8 @@ export interface FileRouteTypes {
     | '/philosophy'
     | '/roadmap'
     | '/blog/$bId'
+    | '/blog/$bId copy'
+    | '/blog/blogFeedback'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +207,8 @@ export interface RootRouteChildren {
   PhilosophyRoute: typeof PhilosophyRoute
   RoadmapRoute: typeof RoadmapRoute
   BlogBIdRoute: typeof BlogBIdRoute
+  BlogBIdcopyRoute: typeof BlogBIdcopyRoute
+  BlogBlogFeedbackRoute: typeof BlogBlogFeedbackRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -265,6 +291,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/blogFeedback': {
+      id: '/blog/blogFeedback'
+      path: '/blog/blogFeedback'
+      fullPath: '/blog/blogFeedback'
+      preLoaderRoute: typeof BlogBlogFeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$bId copy': {
+      id: '/blog/$bId copy'
+      path: '/blog/$bId copy'
+      fullPath: '/blog/$bId copy'
+      preLoaderRoute: typeof BlogBIdcopyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$bId': {
       id: '/blog/$bId'
       path: '/blog/$bId'
@@ -287,6 +327,8 @@ const rootRouteChildren: RootRouteChildren = {
   PhilosophyRoute: PhilosophyRoute,
   RoadmapRoute: RoadmapRoute,
   BlogBIdRoute: BlogBIdRoute,
+  BlogBIdcopyRoute: BlogBIdcopyRoute,
+  BlogBlogFeedbackRoute: BlogBlogFeedbackRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport

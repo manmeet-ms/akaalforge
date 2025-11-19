@@ -1,7 +1,11 @@
-export default {
+export default ({ env }) =>({
+   responses: {
+    privateAttributes: ['_v', 'id', 'created_at'],
+  },
   rest: {
-    defaultLimit: 25,
-    maxLimit: 100,
+      prefix: '/v1',
+    defaultLimit: 100,
+    maxLimit: 250,
     withCount: true,
   },
-};
+});

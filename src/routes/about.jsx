@@ -16,8 +16,8 @@ const defaultCompanies = [
     alt: "Akaalforge",
   },
   {
-    src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762342996/jathedar_pwe5e7.png",
-    alt: "Jathedar",
+    src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762342996/akaalforge_pwe5e7.png",
+    alt: "Akaalforge",
   },
   {
     src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762343080/shastarkosh_qlog2a.png",
@@ -77,7 +77,7 @@ function RouteComponent({
   imageAlt = "Ancient Indian manuscripts and artifacts",
   overviewHeading = "THE PHILOSOPHY",
   mainDescription = "BUILD WHAT NEEDS TO EXIST. SHIP IT. ITERATE. REPEAT. NO PERMISSION NEEDED, NO INVESTORS TO PLEASE, NO TRENDS TO CHASE.",
-  detailDescription = "Akaalforge started with a simple idea: stop waiting for someone else to build the tools you need. Every project here began with a problem I faced personally. Jathedar for self-tracking without corporate surveillance. Shastarkosh for preserving cultural knowledge before it's lost. Mistwrite for capturing fleeting thoughts. Essentia for meal planning that actually works. No market research, no focus groups, no pitch decks. Just gut feeling and execution. Some projects are polished, some are rough. All of them work. All of them solve real problems. That's the only metric that matters. We're not building a unicorn. We're building tools that should exist, releasing them into the world, and moving on to the next problem. If they help others along the way, that's a bonus.",
+  detailDescription = "Akaalforge started with a simple idea: stop waiting for someone else to build the tools you need. Every project here began with a problem I faced personally. Akaalforge for self-tracking without corporate surveillance. Shastarkosh for preserving cultural knowledge before it's lost. Mistwrite for capturing fleeting thoughts. Essentia for meal planning that actually works. No market research, no focus groups, no pitch decks. Just gut feeling and execution. Some projects are polished, some are rough. All of them work. All of them solve real problems. That's the only metric that matters. We're not building a unicorn. We're building tools that should exist, releasing them into the world, and moving on to the next problem. If they help others along the way, that's a bonus.",
   buttonText = "Explore Collection",
 }) {
   const process = [
@@ -113,16 +113,11 @@ function RouteComponent({
         </div> */}
           <section className="py-8">
             <div className="container">
-              <div className="py-12">
+              <div className="py-6">
                 <div>
                   <h1 className="text-foreground font-serif text-6xl font-light leading-none tracking-tight md:text-8xl lg:text-9xl">
-                    {title}
-                    {title2 && (
-                      <>
-                        <br />
-                        {title2}
-                      </>
-                    )}
+                  AKAALFORGE <br />
+PHILOSOPHY
                   </h1>
                 </div>
 

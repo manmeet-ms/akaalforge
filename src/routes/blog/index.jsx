@@ -1,64 +1,82 @@
+import { Badge } from "@/components/ui/badge"
 import LandingFooter from "@/components/Footer/LandingFooter";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import LandingHeader from "../../components/Header/LandingHeader.jsx";
 import { ArrowRight } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import dayjs from "dayjs";
 
 export const Route = createFileRoute("/blog/")({
   component: RouteComponent,
 });
 
-function RouteComponent({
+function RouteComponent(
+  {
   heading = "Blog Posts",
   description = "Discover the latest insights and tutorials about modern web development, UI design, and component-driven architecture.",
-  posts = [
-    {
-      id: "post-1",
-      title:
-        "Building Modern UIs: A Deep Dive into Shadcn and React Components",
-      summary:
-        "Join us for an in-depth exploration of building modern user interfaces using shadcn/ui and React. Learn best practices and advanced techniques.",
-      label: "Web Design",
-      author: "Sarah Chen",
-      published: "15 Feb 2024",
-      url: "https://shadcnblocks.com",
-      image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-      tags: ["Web Design", "UI Development"],
-    },
-    {
-      id: "post-2",
-      title: "Mastering Tailwind CSS: From Basics to Advanced Techniques",
-      summary:
-        "Discover how to leverage the full power of Tailwind CSS to create beautiful, responsive websites with clean and maintainable code.",
-      label: "Web Design",
-      author: "Michael Park",
-      published: "22 Feb 2024",
-      url: "https://shadcnblocks.com",
-      image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-      tags: ["Web Design", "CSS"],
-    },
-  ],
-}) {
+  
+  
+}
+) {
+
+  const asset = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http")) return url;
+    return `${import.meta.env.VITE_STRAPI_BACKEND_URL}${url}`;
+  };
+
+  const [blogs, setblogs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+ const fetchBlogs = async () => {
+      try {
+     
+        const response = await axios.get(import.meta.env.VITE_STRAPI_BACKEND_API_URL + 'articles?populate=*')
+     
+        // const response = await fetch(import.meta.env.VITE_STRAPI_BACKEND_URL + 'articles?populate=*')
+        // const data = await response.json()
+        
+        console.log("response.data.data,",response.data.data);
+        
+        setblogs(response.data.data)
+        console.log("fetchBlogs",blogs);
+      } catch (error) {
+        setError(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    useEffect(() => {
+      
+      fetchBlogs() 
+      console.log("useEffect fetchBlogs",blogs);
+  
+  }, [])
   return (
-    <>
+    <> 
       <LandingHeader />
       {/* <HeroRed /> */}
- <section className="py-32">
-      <div className="container flex flex-col items-center gap-16">
-        <div className="text-center">
-          <h2 className="mx-auto mb-6 text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl">
-            {heading}
-          </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl md:text-lg">
-            {description}
-          </p>
-        </div>
+     
+ <section className="py-8">
+      <div className="container flex flex-col px-12 gap-16">
+           <div className="py-6">
+              <div>
+                <h1 className="text-foreground font-serif text-6xl font-light leading-none tracking-tight md:text-8xl lg:text-9xl">
+                  BLOGS
+                </h1>
+              <p>Discover the latest insights and tutorials about modern web development, UI design, and component-driven architecture.</p>
+              </div>
+ 
+            </div>
+
 
         <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
-          {posts.map((post) => (
-            <Card
+          {loading===true ? "Loading...": blogs.map((post) => (
+            <Card 
               key={post.id}
               className="order-last border-0 bg-transparent shadow-none sm:order-first sm:col-span-12 lg:col-span-10 lg:col-start-2"
             >
@@ -66,49 +84,50 @@ function RouteComponent({
                 <div className="sm:col-span-5">
                   <div className="mb-4 md:mb-6">
                     <div className="text-muted-foreground flex flex-wrap gap-3 text-xs uppercase tracking-wider md:gap-5 lg:gap-6">
-                      {post.tags?.map((tag) => <span key={tag}>{tag}</span>)}
+                      <Badge variant="secondary" >{post?.category?.name}</Badge>
                     </div>
                   </div>
                   <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                    <a
-                      href={post.url}
-                      target="_blank"
+                    <Link
+                      to={"/blog/"+post.documentId}
+                      
                       className="hover:underline"
                     >
                       {post.title}
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-muted-foreground mt-4 md:mt-5">
-                    {post.summary}
+                    {post.description}
                   </p>
                   <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
-                    <span className="text-muted-foreground">{post.author}</span>
+                    <span className="text-muted-foreground">{post.author?.name}</span>
                     <span className="text-muted-foreground">•</span>
                     <span className="text-muted-foreground">
-                      {post.published}
+                   {dayjs(post.publishedAt).format("DD MMM, YYYY")}
                     </span>
                   </div>
                   <div className="mt-6 flex items-center space-x-2 md:mt-8">
-                    <a
-                      href={post.url}
-                      target="_blank"
+                    <Link
+                      to={"/blog/"+post.documentId}
+                       
                       className="inline-flex items-center font-semibold hover:underline md:text-base"
                     >
                       <span>Read more</span>
                       <ArrowRight className="ml-2 size-4 transition-transform" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="order-first sm:order-last sm:col-span-5">
-                  <a href={post.url} target="_blank" className="block">
+                  <Link to={"/blog/"+post.documentId}
+                       className="block">
                     <div className="aspect-16/9 border-border overflow-clip rounded-lg border">
                       <img
-                        src={post.image}
+                        src={asset(post?.cover?.formats?.large?.url || post?.cover?.url)}
                         alt={post.title}
                         className="fade-in h-full w-full object-cover transition-opacity duration-200 hover:opacity-70"
                       />
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </Card>
