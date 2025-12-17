@@ -170,7 +170,7 @@ const App = () => {
           </section>
         </main>
 
-        <img src="/assets/footer-image.png" alt="" />
+        <img src="/assets/footer-dark.png" alt="" />
 
         <AuthModal />
         {/* <AppFooter /> */}

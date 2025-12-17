@@ -8,7 +8,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { MenuIcon } from "lucide-react";
 
 import { APP_NAME } from "../../../shared/constants.js";
-import { ModeToggle } from "../../components/mode-toggle.jsx";
+import ModeToggle from "../mode-toggle";
 
 const LandingHeader = () => {
   const features = [
@@ -29,7 +29,7 @@ const pathname=useLocation().pathname
     <section className="sticky  top-0 z-99">
       <nav className="bg-background/80 dark:bg-background/20   px-4 backdrop-blur-xl  py-2 flex  items-center justify-between">
         <a href="/" className="flex items-center gap-2">
-          <img src="/assets/transparent-shastarkosh-logo-dark.png" className="max-h-8" alt="Shadcn UI Navbar" />
+          <img src="/logo/logo-transparent-dark.svg" className="max-h-8" alt="Shadcn UI Navbar" />
           <span className="text-lg font-semibold -ml-1.5 tracking-tighter">{APP_NAME}</span>
         </a>
         <NavigationMenu className="hidden lg:block">
@@ -62,10 +62,10 @@ const pathname=useLocation().pathname
           </NavigationMenuList>
         </NavigationMenu>
         <div className="hidden items-center gap-4 lg:flex">
+          {/* <ModeToggle /> */}
           {pathname !== "/contact" && <Link to="/contact" className="font-medium">
             <Button>Contact</Button>
           </Link>}
-          <ModeToggle />
         </div>
         <Sheet>
           <SheetTrigger asChild className="lg:hidden">
@@ -77,7 +77,7 @@ const pathname=useLocation().pathname
             <SheetHeader>
               <SheetTitle>
                 <Link to="/" className="flex items-center gap-2">
-                  <img src="/assets/transparent-shastarkosh-logo-dark.png" className="max-h-8" alt="shastakosh Logo" />
+                  <img src="/logo/logo-transparent-dark.svg" className="max-h-8" alt="shastakosh Logo" />
                   <span className="text-lg font-semibold tracking-tighter">{APP_NAME}</span>
                 </Link>
               </SheetTitle>

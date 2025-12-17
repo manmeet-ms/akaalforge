@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useGSAP } from "@gsap/react";
 import { IconChevronDown } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { Link } from "@tanstack/react-router";
+
+import LiquidEther from "./LiquidEther.jsx";
 
 gsap.registerPlugin(SplitText, useGSAP);
 export const useWindowSize = () => {
@@ -121,26 +123,38 @@ export const HaloHero = ({
     },
     { scope: sectionRef }
   );
- 
+
   return (
     <section ref={sectionRef} className="relative  h-screen   overflow-hidden">
-      <div className="absolute inset-0 hue-rotate-160  saturate-30 brightness-50   ">
+      <div className="absolute inset-0   ">
+        <div className="  w-full h-full relative">
+          <video className=" absolute inset-0 w-full h-full object-cover 
+               hue-rotate-280 saturate-60 brightness-75 opacity-30 " autoPlay muted loop playsInline>
+            <source src="/assets/hero-red.mp4" type="video/mp4" />
+          </video>
+      
+       <div className="absolute inset-0   mix-blend-screen">
+    <LiquidEther
+      colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+      mouseForce={30}
+      cursorSize={100}
+      isViscous={false}
+      viscous={30}
+      iterationsViscous={32}
+      iterationsPoisson={32}
+      resolution={0.5}
+      isBounce={false}
+      autoDemo={true}
+      autoSpeed={0.5}
+      autoIntensity={2.2}
+      takeoverDuration={0.25}
+      autoResumeDelay={3000}
+      autoRampDuration={0.6}
+    />
+  </div>
+        </div>
         {/* <Scene /> */}
-      {/* <NeuralNetwork/> */}
-       <video
-          className="hero-video      object-cover z-0 "
-          autoPlay
-          muted
-          loop
-onClickCapture={()=>(console.log("clicked"))}
-          playsInline
-        >
-          <source
-            src="/assets/hero-red.mp4"
-            type="video/mp4"
-            
-          />
-        </video> 
+        {/* <NeuralNetwork/> */}
       </div>
 
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 pb-24 pt-8 sm:gap-8 md:pt-12 md:px-10 lg:px-16">
@@ -151,20 +165,24 @@ onClickCapture={()=>(console.log("clicked"))}
           {/* <span className="text-xs  tracking-tight text-white/80">{badgeText}</span> */}
         </div>
 
-        <h1 ref={headerRef} className="uppercase  text-pretty text-background dark:text-foreground  text-6xl w-[70vw] font-mono font-medium md:-tracking-[8px] md:text-[8rem]   ">
+        <h1 ref={headerRef} className="uppercase  text-pretty text-background dark:text-foreground  text-6xl w-[70vw]    md:-tracking-[6px] md:text-[8rem]   ">
           Step into\
- <br />          Akaalforge.
+          <br /> Akaalforge.
         </h1>
 
         {/* <p ref={paraRef} className="max-w-xl text-left text-base  leading-relaxed tracking-tight text-white/75 sm:text-lg">
           {description}
           </p> */}
- <div ref={ctaRef} className="flex flex-wrap items-center gap-3 ">
+        <div ref={ctaRef} className="flex flex-wrap items-center gap-3 ">
           {/* <Button>Get Started</Button> */}
-          <Button className="flex gap-1 justify-center items-center" >View Showcase   </Button>
-          <Button variant="ghost" className="flex gap-1 justify-center items-center" > <Link to="#why-akaalforge" >Scroll down <IconChevronDown className="inline-flex " /></Link>   </Button>
-         
-          
+          <Button className="flex gap-1 justify-center items-center">View Showcase </Button>
+          <Button variant="ghost" className="flex gap-1 justify-center items-center">
+            {" "}
+            <Link to="#why-akaalforge">
+              Scroll down <IconChevronDown className="inline-flex " />
+            </Link>{" "}
+          </Button>
+
           {/* {ctaButtons.map((button, index) => (
             <a key={index} href={button.href} className={`rounded-2xl border border-white/10 px-5 py-3 text-sm  tracking-tight transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 duration-300 ${button.primary ? "bg-white/10 text-white backdrop-blur-sm hover:bg-white/20" : "text-white/80 hover:bg-white/5"}`}>
               

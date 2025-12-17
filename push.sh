@@ -1,5 +1,4 @@
 git status --short
 git add -A
-git commit -am "blog structure changes \n
-./backend strapi intervention blogs udated and added planning to switch to hashnode api"
+git commit -am "hero updated"
 git push origin main

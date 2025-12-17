@@ -1,6 +1,5 @@
 import LandingFooter from "@/components/Footer/LandingFooter";
 import { HaloHero } from "@/components/Halo.tsx";
-import NeuralNetwork from "@/components/neural-network-hero.tsx";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,8 +7,9 @@ import { IconArrowRightDashed, IconChevronUp, IconDrone } from "@tabler/icons-re
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MoveRight, PlusIcon } from "lucide-react";
-
-import LandingHeader from "../components/Header/LandingHeader.jsx";
+import LiquidEther from "@/components/LiquidEther.jsx";
+import Casestudy from "@/components/Casestudy.jsx";
+import LandingHeader from "@/components/Header/LandingHeader.jsx";
 import "../lib/blockimage.js";
 
 export const Route = createFileRoute("/")({
@@ -49,11 +49,14 @@ const services = [
 ];
 
 function RouteComponent() {
+  
   return (
     <>
       <LandingHeader />
       {/* <HeroRed /> */}
       <HaloHero />
+      
+ 
       {/* <NeuralNetwork /> */}
 
       <main className="px-12 py-12">
@@ -65,7 +68,7 @@ function RouteComponent() {
                   <span className="size-1.5 mt-0.5 rounded-full bg-primary" />
                   Philosophy
                 </Badge>
-                <h1 className="text-balance text-4xl font-medium lg:text-5xl capitalize">One ideology: Build what needs to exist_</h1>
+                <h1 className="text-balance text-4xl font-medium lg:text-5xl capitalize">One ideology: Build what needs to exist<span className="animate-caret-blink" >_</span></h1>
                 <p className="text-muted-foreground text-lg">We're not here to chase trends or build another SaaS clone. Akaalforge is an umbrella for projects born from real needs — self-tracking that works, preserving knowledge that's fading, and productivity tools that don't get in your way.</p>
                 <div className="flex items-center gap-6">
                   {/* <img src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/compliance/GDPR.svg" alt="GDPR" className="h-22 opacity-50 grayscale md:h-28 dark:invert" />
@@ -119,7 +122,7 @@ function RouteComponent() {
             <div className="flex flex-col justify-between lg:col-span-1">
             <section id="impact" className="py-20 mb-10">
           <div className="container flex flex-col items-center text-left">
-            <h2 className="mb-12 md:mb-16 text-center w-full text-pretty text-3xl sm:text-4xl lg:text-6xl">Project Status_</h2>
+            <h2 className="mb-12 md:mb-16 text-center w-full text-pretty text-3xl sm:text-4xl lg:text-6xl">Project Status<span className="animate-caret-blink" >_</span></h2>
             <div className="grid w-full grid-cols-2 gap-12 sm:w-fit sm:grid-cols-2 lg:gap-16">
               <div className="w-full flex flex-col items-center">
                 <div className="mb-2 text-4xl text-center font-semibold sm:text-4xl lg:text-5xl">4</div>
@@ -194,7 +197,7 @@ function RouteComponent() {
             </div>
           </div>
         </section>
-
+{/* <Casestudy/>   */}
         
         <div className="relative        mx-auto flex w-full   flex-col justify-between gap-y-6 border-y bg-[radial-gradient(35%_80%_at_25%_0%,--theme(--color-foreground/.08),transparent)] px-4 py-12 ">
           <PlusIcon className="absolute top-[-12.5px] left-[-11.5px] z-1 size-6" strokeWidth={1} />

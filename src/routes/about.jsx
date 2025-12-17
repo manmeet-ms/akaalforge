@@ -3,9 +3,9 @@ import { IconBrandDiscord, IconBrandGithub } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Asterisk, CornerDownRight } from "lucide-react";
 
-import LandingFooter from "../components/Footer/LandingFooter";
-import LandingHeader from "../components/Header/LandingHeader";
-import CommunityBlock from "../components/CommunityBlock";
+import LandingFooter from "@/components/Footer/LandingFooter";
+import LandingHeader from "@/components/Header/LandingHeader";
+import CommunityBlock from "@/components/CommunityBlock";
 
 export const Route = createFileRoute("/about")({
   component: RouteComponent,
@@ -17,16 +17,20 @@ const defaultCompanies = [
   },
   {
     src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762342996/akaalforge_pwe5e7.png",
-    alt: "Akaalforge",
+    alt: "Karman",
   },
   {
     src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762343080/shastarkosh_qlog2a.png",
     alt: "Shastarkosh",
   },
-  // {
-  //   src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762343079/mistwrite_y2pbjn.png",
-  //   alt: "Mistwrite",
-  // },
+  {
+    src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762343079/mistwrite_y2pbjn.png",
+    alt: "Mistwrite",
+  },
+  {
+    src: "https://res.cloudinary.com/dckgfz6cr/image/upload/v1762343079/mistwrite_y2pbjn.png",
+    alt: "Essentia",
+  },
  
 ];
 
@@ -39,8 +43,8 @@ const defaultAchievements = [
 const Illustration = (props) => {
   return (
     <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <line x1="0.607422" y1="2.57422" x2="21.5762" y2="2.57422" stroke="#FF0000" strokeWidth="4" />
-      <line x1="19.5762" y1="19.624" x2="19.5762" y2="4.57422" stroke="#FF0000" strokeWidth="4" />
+      <line x1="0.607422" y1="2.57422" x2="21.5762" y2="2.57422" stroke="var(--primary)" strokeWidth="4" />
+      <line x1="19.5762" y1="19.624" x2="19.5762" y2="4.57422" stroke="var(--primary)" strokeWidth="4" />
     </svg>
   );
 };
@@ -204,19 +208,19 @@ PHILOSOPHY
               <div className="relative w-fit text-5xl font-semibold tracking-tight lg:text-7xl">
                 {" "}
                 <h1 className="w-fit">Our Process</h1>
-                <Asterisk className="absolute -right-2 -top-2 size-5 text-orange-500 md:size-10 lg:-right-14" />
+                <Asterisk className="absolute -right-2 animate-spin animation-duration-[15s] -top-2 size-5 text-primary md:size-10 lg:-right-14" />
               </div>
               <p className="text-foreground/50 text-base">Four steps, repeated for every project. No deviation, no shortcuts. This is how we build: identify, execute, release, move on. Simple, effective, honest.</p>
 
               <Button asChild variant="ghost" className="flex items-center justify-start gap-2">
-                <a href="/#showcase"><CornerDownRight className="text-orange-500" />
+                <a href="/#showcase"><CornerDownRight className="text-primary" />
                 See the projects</a>
               </Button>
             </div>
             <ul className="lg:pl-22 relative col-span-4 w-full">
               {process.map((step, index) => (
                 <li key={index} className="relative flex flex-col justify-between gap-10 border-t py-8 md:flex-row lg:py-10">
-                  <Illustration className="absolute right-0 top-4" />
+                  <Illustration className="absolute right-0 top-6 animate-bounce animation-duration-[3s]" />
 
                   <div className="bg-muted flex size-12 items-center justify-center px-4 py-1 tracking-tighter">0{index + 1}</div>
                   <div className="">

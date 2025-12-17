@@ -18,6 +18,7 @@ const router = createRouter({
   defaultStaleTime: 5000,
   // defaultErrorComponent:AppErrorComponent,
   scrollRestoration: true,
+  defaultViewTransition: true,
   defaultNotFoundComponent: () => {
     return <NotFound404 />;
   },

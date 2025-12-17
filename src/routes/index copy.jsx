@@ -10,7 +10,7 @@ import { MoveRight, PhoneCall } from "lucide-react";
 import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { ArrowUpRight, ChevronRight, ChevronUp } from "lucide-react";
 
-import LandingHeader from "../components/Header/LandingHeader.jsx";
+import LandingHeader from "@/components/Header/LandingHeader.jsx";
 import "../lib/blockimage.js";
 import {  IconArrowRightDashed, IconChevronUp, IconDrone } from "@tabler/icons-react";
 import { HaloHero } from "@/components/Halo";

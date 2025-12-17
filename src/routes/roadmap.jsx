@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import LandingFooter from "../components/Footer/LandingFooter";
-import LandingHeader from "../components/Header/LandingHeader";
+import LandingFooter from "@/components/Footer/LandingFooter";
+import LandingHeader from "@/components/Header/LandingHeader";
 
 export const Route = createFileRoute("/roadmap")({
   component: RouteComponent,
@@ -48,9 +48,9 @@ function RouteComponent({
     <div>
       <LandingHeader />
 
-      <section className="py-16">
+      <section className="p-8">
         <div className="container">
-          <div className="mx-auto max-w-7xl">
+          <div className=" max-w-7xl">
             <div className="py-6">
               <div>
                 <h1 className="text-foreground font-serif text-6xl font-light leading-none tracking-tight md:text-8xl lg:text-9xl">

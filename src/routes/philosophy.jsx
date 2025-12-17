@@ -2,8 +2,8 @@ import { ArrowRight, Asterisk, CornerDownRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { createFileRoute } from '@tanstack/react-router';
-import LandingHeader from "../components/Header/LandingHeader";
-import LandingFooter from "../components/Footer/LandingFooter";
+import LandingHeader from "@/components/Header/LandingHeader";
+import LandingFooter from "@/components/Footer/LandingFooter";
 
 export const Route = createFileRoute('/philosophy')({
   component: RouteComponent,
